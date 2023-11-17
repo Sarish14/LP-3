@@ -12,7 +12,7 @@ using namespace std;
 int partition(int *arr, int low, int high, int &counter) {
     int pivot = arr[high];
     int i = low - 1;  // Index of smaller element, Indicates the right position of pivot found so far
-    for (int j = low; j <= high; j++) {
+    for (int j = low; j < high; j++) {
         counter++;
         if (arr[j] < pivot) {
             i++;
@@ -36,7 +36,7 @@ int randomPartition(int *arr, int low, int high, int &counter) {
 	int pivot = arr[ri];
 	int i = low - 1;
 	swap(arr[ri], arr[high]);               //  reason behind this swap is to treat the selected pivot as if it were the last element in the array
-	for (int j = low; j <= high; j++)
+	for (int j = low; j < high; j++)
 	{
 		counter++;
 		if (arr[j] <= pivot)
