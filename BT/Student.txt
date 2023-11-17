@@ -1,37 +1,43 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity >= 0.7.0;
+pragma solidity >=0.7.0;
 
-contract Bank_management{
+contract student_data {
 
-    struct Student{
-        int stud_id;
-        string Name;
-        string Department;
+    struct student {
+        uint stud_id;
+        string stud_name;
+        string stud_dept;
     }
 
-    Student [] Students;
+    student[] students;
 
-    function add_stud(int stud_id,string memory Name,string memory Department) public{
-        Student memory stud = Student(stud_id,Name,Department);
-        Students.push(stud);
+    function add_student(uint id,string memory name,string memory dept )  public  {
+        student memory stud= student(id,name,dept);
+        students.push(stud);
+
     }
 
-    function get_stud(int stud_id)public view returns(string memory,string memory){
-        for(uint i = 0; i < Students.length; i++ ){
-            Student memory stud = Students[i];
-            if(stud.stud_id == stud_id){
-                return (stud.Name,stud.Department);
+    function get_data(uint id) public view returns(string memory,string memory){
+        for(uint i=0;i<students.length;i++){
+            if(students[i].stud_id==id){
+                return (students[i].stud_name,students[i].stud_dept);
             }
         }
-        return ("Name Not Found","Department Not Found");
+        return ("Name not found","Department not found");
+
     }
 
-    fallback() external payable  {
-        Students.push(Student(999, "Default Student", "Default Department"));
-        emit EtherReceived(msg.sender, msg.value);
+    function get_balance() public view returns (uint){
+        return address(this).balance;
     }
-    receive() external payable { 
-        emit EtherReceived(msg.sender,msg.value);
+
+    fallback() external payable {
+        students.push(student(1111,"ABC","DEF"));
     }
-    event EtherReceived(address indexed sender, uint256 amount);
+}
+
+contract sender{
+    function callfallback(address payable to) public payable{
+        (bool sent,)=to.call{value:msg.value}("");
+        require(sent,"Failed to send ");
+    }
 }
