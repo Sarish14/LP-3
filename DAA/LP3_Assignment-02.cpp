@@ -137,6 +137,10 @@ int main() {
 }
 
 
+// Time Complexity : O(n log(n))
+//extraction of the two nodes with the lowest frequencies from the priority queue typically takes O(log n) time
+//process of extracting two minimum elements and inserting a new element back into the priority queue or heap happens 'n-1' times, where 'n' is the number of symbols or nodes
+
 
 //5
 //a b c d e
