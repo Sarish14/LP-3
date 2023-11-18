@@ -77,7 +77,8 @@ int main() {
     return 0;
 }
 
-
+// Time Complexity: O(N * W). where ‘N’ is the number of elements and ‘W’ is capacity
+// Auxiliary Space: O(N * W). The use of a 2-D array of size ‘N*W’
 
 
 
